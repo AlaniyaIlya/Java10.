@@ -2,36 +2,50 @@ package ru.netology.smartHouse;
 
 public class Radio {
     public int NumberStation;
-    public int Volume;
+    public int stationNumberRadio = 10;
+    public int minStationNumber = 0;
+    public int maxStationNumber = 9;
+    public int Volume = 50;
+    public int minVolume = 0;
+    public int maxVolume = 100;
 
-    public void setNumberStation(int newNumberStation) {
-        if (newNumberStation < 0) {
-            NumberStation = 9;
+    public Radio(int number) {
+        this.stationNumberRadio = number;
+        this.maxStationNumber = number - 1;
+    }
+
+    public Radio() {
+
+    }
+
+    public void setNumberStation(int newstationNumber) {
+        if (newstationNumber < minStationNumber) {
+            stationNumberRadio = maxStationNumber;
             return;
         }
-        if (newNumberStation > 9) {
-            NumberStation = 0;
+        if (newstationNumber > maxStationNumber) {
+            stationNumberRadio = minStationNumber;
             return;
         }
-        NumberStation = newNumberStation;
+        stationNumberRadio = newstationNumber;
     }
 
     public void next() {
-        setNumberStation(NumberStation + 1);
+        setNumberStation(stationNumberRadio + 1);
     }
 
     public void prev() {
-        setNumberStation(NumberStation - 1);
+        setNumberStation(stationNumberRadio - 1);
     }
 
     public void increaseVolume() {
-        if (Volume < 10) {
+        if (Volume < maxVolume) {
             Volume = Volume + 1;
         }
     }
 
     public void decreaseVolume() {
-        if (Volume > 0) {
+        if (Volume > minVolume) {
             Volume = Volume - 1;
         }
     }
